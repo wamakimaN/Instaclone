@@ -11,6 +11,6 @@ def home_page(request):
   return render(request, 'homepage.html',{"title":title})
 
 @method_decorator(login_required, name='dispatch')
-class SiteView(View):
+class SiteView(ListView):
   model = Post
   template_name = 'insta.html'
