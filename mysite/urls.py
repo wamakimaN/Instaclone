@@ -7,4 +7,5 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     url(r'^$', views.home_page, name='homePage'),
     url(r'^insta/$', views.SiteView.as_view(), name='insta'),
+    url(r'^login/$', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
 ] 
