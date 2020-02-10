@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from .models import Post,Comment,Profile,Like
 from django.views import View
-from django.contrib.auth.forms UserCreationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.list import ListView
 
 # Create your views here.
@@ -17,4 +17,12 @@ class SiteView(ListView):
   template_name = 'insta.html'
 
 def registration(request):
-  form = Uer
+  form = UserCreationForm()
+
+  if request.method == 'POST':
+    form = UserCreationForm(request.Post)
+    if form.is_valid():
+      form.save()
+
+  context = {'form':form}
+  return render(request, 'signup.html', context)
