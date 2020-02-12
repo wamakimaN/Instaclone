@@ -18,6 +18,13 @@ class SiteView(View):
     posts = Post.objects.all()
     form = PostForm
     return render(request,'insta.html', {'posts':posts,'form':form})
+  
+  def post(self,request):
+    form = PostForm(request.POST)
+    if form.is_valid():
+      form.save()
+      return redirect('insta')
+    return render(request,'insta.html', {'form':form})
 
   template_name = 'insta.html'
 
