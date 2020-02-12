@@ -9,7 +9,10 @@ class Profile(models.Model):
   phone_number = models.IntegerField(blank =True, null = True)
   location = models.CharField(max_length = 30, blank =True)
   birth_date = models.DateField(null =True, blank = True)
-  profile_pic = models.ImageField(null =True, blank = True)
+  profile_pic = models.ImageField(default= 'default.jpg', upload_to='profile_pics')
+
+  def __str__(self):
+    return f'{self.user.username} Profile'
 
 class Post(models.Model):
   profile = models.ForeignKey(Profile, null = True, blank = True)
