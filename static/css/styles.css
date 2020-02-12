@@ -1,0 +1,19 @@
+h3{
+  color: brown;
+}
+
+nav{
+  height: 65px;
+  text-decoration: none;
+}
+a{
+  font-family: 'Sacramento', cursive;
+  font-size: larger;
+  font-weight: bolder;
+  color: #662C91;
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: none;
+}

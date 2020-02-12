@@ -13,7 +13,7 @@ class Profile(models.Model):
 
 class Post(models.Model):
   profile = models.ForeignKey(Profile, null = True, blank = True)
-  title = models.CharField(max_length = 100)
+  caption = models.CharField(max_length = 100)
   image = models.ImageField()
   posted_on = models.DateTimeField(auto_now_add=True)
 

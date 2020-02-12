@@ -5,6 +5,7 @@ from .models import Post,Comment,Profile,Like
 from django.views import View
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.list import ListView
+from .forms import PostForm
 
 # Create your views here.
 def home_page(request):
@@ -12,8 +13,12 @@ def home_page(request):
   return render(request, 'homepage.html',{"title":title})
 
 @method_decorator(login_required, name='dispatch')
-class SiteView(ListView):
-  model = Post
+class SiteView(View):
+  def get(self, request):
+    posts = Post.objects.all()
+    form = PostForm
+    return render(request,'insta.html', {'posts':posts,'form':form})
+
   template_name = 'insta.html'
 
 def registration(request):
