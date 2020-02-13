@@ -18,19 +18,20 @@ class SiteView(View):
     posts = Post.objects.all()
     return render(request,'insta.html', {'posts':posts})
 
-@method_decorator(login_required, name='dispatch')
-class PostCreate(View):
-  def get(self, request):
-    form = PostForm
-    return render(request,'post.html', {'form':form})
+@login_required(login_url='login')
+def new_post(request):
+    current_user = request.user.profile
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.profile = current_user
+            post.save()
+        return redirect('insta')
 
-  def post(self, request):
-    form = PostForm(request.POST)
-    if form.is_valid():
-      form.save()
-      return redirect('insta')
-    return render(request, 'post.html', {'form': form})
-
+    else:
+        form = PostForm()
+    return render(request, 'post.html', {"form": form, "current_user":current_user})
 
 def registration(request):
   form = UserCreationForm()
