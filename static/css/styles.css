@@ -33,3 +33,7 @@ a:hover{
   margin:0 auto;
   display:block;
 }
+
+.card{
+  margin-top: 15px;
+}

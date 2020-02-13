@@ -5,7 +5,26 @@
   <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-     
+     {% for post in posts %}
+     <!-- Card -->
+<div class="card">
+
+  <!-- Card image -->
+  <img class="card-img-top" src="{{post.image.url}}" alt="Card image cap">
+
+  <!-- Card content -->
+  <div class="card-body">
+
+    <!-- Title -->
+    <h4 class="card-title"><a>{{post.profile.user}}</a></h4>
+    <!-- Text -->
+    <p class="card-text">{{post.caption}}</p>
+
+  </div>
+
+</div>
+<!-- Card -->
+     {% endfor %}
     </div>
     <div class="col-md-4">
       <h1>{{user.username}}</h1>
