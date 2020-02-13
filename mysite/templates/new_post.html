@@ -6,12 +6,12 @@
     <div class="col-md-4"></div>
     <div class="col-md-4">
       <div class="form">
-        <form action="#!" method="post" novalidate>
+        <form action="#!" method="post">
           {% csrf_token %}
           {{ form|crispy }}
-          <p><input class="btn btn-outline-danger" type="submit" value="submit"></p>
+          <p><input class="btn btn-outline-danger" type="submit" value="Post"></p>
         </form>
-        <p>{{current_user}}</p>
+        <p>{{post.profile}}</p>
       </div>
     </div>
   </div>

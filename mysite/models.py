@@ -17,7 +17,7 @@ class Profile(models.Model):
 class Post(models.Model):
   profile = models.ForeignKey(Profile, null = True, blank = True)
   caption = models.CharField(max_length = 100)
-  image = models.ImageField()
+  image = models.ImageField(upload_to='post_pics')
   posted_on = models.DateTimeField(auto_now_add=True)
 
   def __str__(self):

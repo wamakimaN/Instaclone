@@ -1,46 +1,49 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from .models import Post,Comment,Profile,Like
+from .models import Post, Comment, Profile, Like, User
 from django.views import View
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.list import ListView
 from .forms import PostForm
 
 # Create your views here.
+
+
 def home_page(request):
-  title = 'Insta'
-  return render(request, 'homepage.html',{"title":title})
+    title = 'Insta'
+    return render(request, 'homepage.html', {"title": title})
+
 
 @method_decorator(login_required, name='dispatch')
 class SiteView(View):
-  def get(self, request):
-    posts = Post.objects.all()
-    return render(request,'insta.html', {'posts':posts})
+    def get(self, request):
+        posts = Post.objects.all()
+        return render(request, 'insta.html', {'posts': posts})
 
-@login_required(login_url='login')
-def new_post(request):
-    current_user = request.user.profile
-    if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.profile = current_user
-            post.save()
-        return redirect('insta')
 
-    else:
+@method_decorator(login_required, name='dispatch')
+class PostCreate(View):
+    def get(self, request):
         form = PostForm()
-    return render(request, 'post.html', {"form": form, "current_user":current_user})
+        return render(request, 'new_post.html', {'form': form})
+
+    def post(self, request):
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('insta')
+        return render(request, 'new_post.html', {'form': form})
+
 
 def registration(request):
-  form = UserCreationForm()
+    form = UserCreationForm()
 
-  if request.method == 'POST':
-    form = UserCreationForm(request.POST)
-    if form.is_valid():
-      form.save()
-      return redirect('login')
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
 
-  context = {'form':form}
-  return render(request, 'signup.html', context)
+    context = {'form': form}
+    return render(request, 'signup.html', context)
