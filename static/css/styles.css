@@ -17,3 +17,19 @@ a{
 a:hover{
   text-decoration: none;
 }
+.home{
+  height: 650px;
+  background: linear-gradient( rgba(0, 0, 0, 0.596), rgba(0, 0, 0, 0.5) ), url(/static/cam.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  align-items: center;
+}
+
+.btns{
+  margin:0 auto;
+  display:block;
+}

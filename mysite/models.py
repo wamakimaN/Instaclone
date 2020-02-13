@@ -24,11 +24,11 @@ class Post(models.Model):
     return self.caption
 
 class Comment(models.Model):
-  post = models.ForeignKey('Post')
+  post = models.ForeignKey(Post)
   user = models.ForeignKey(User)
   comment = models.CharField(max_length = 100)
   post_on = models.DateTimeField(auto_now_add=True)
 
 class Like(models.Model):
-  post = models.ForeignKey('Post')
+  post = models.ForeignKey(Post)
   user = models.ForeignKey(User)
