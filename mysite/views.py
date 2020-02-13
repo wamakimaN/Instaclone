@@ -16,17 +16,21 @@ def home_page(request):
 class SiteView(View):
   def get(self, request):
     posts = Post.objects.all()
+    return render(request,'insta.html', {'posts':posts})
+
+@method_decorator(login_required, name='dispatch')
+class PostCreate(View):
+  def get(self, request):
     form = PostForm
-    return render(request,'insta.html', {'posts':posts,'form':form})
-  
-  def post(self,request):
+    return render(request,'post.html', {'form':form})
+
+  def post(self, request):
     form = PostForm(request.POST)
     if form.is_valid():
       form.save()
       return redirect('insta')
-    return render(request,'insta.html', {'form':form})
+    return render(request, 'post.html', {'form': form})
 
-  template_name = 'insta.html'
 
 def registration(request):
   form = UserCreationForm()

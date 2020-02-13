@@ -20,6 +20,9 @@ class Post(models.Model):
   image = models.ImageField()
   posted_on = models.DateTimeField(auto_now_add=True)
 
+  def __str__(self):
+    return self.caption
+
 class Comment(models.Model):
   post = models.ForeignKey('Post')
   user = models.ForeignKey(User)
